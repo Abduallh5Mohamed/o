@@ -139,11 +139,13 @@
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 20px;
-            padding: 50px;
+            padding: 30px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 3;
             animation: slideInRight 0.8s ease-out;
+            max-width: 500px;
+            margin: 0 auto;
         }
         
         @keyframes slideInRight {
@@ -158,9 +160,9 @@
         }
         
         .form-title {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: bold;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-align: center;
             color: #ffffff;
             background: linear-gradient(135deg, #ffffff, #E83030);
@@ -170,7 +172,7 @@
         }
         
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             position: relative;
         }
         
@@ -192,12 +194,12 @@
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 18px 20px;
+            padding: 15px 18px;
             background: rgba(255, 255, 255, 0.08);
             border: 2px solid rgba(255, 255, 255, 0.15);
             border-radius: 10px;
             color: #ffffff;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: all 0.3s ease;
         }
         
@@ -279,7 +281,7 @@
         .checkbox-group {
             display: flex;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -312,12 +314,12 @@
         
         .register-btn {
             width: 100%;
-            padding: 18px;
+            padding: 15px;
             background: linear-gradient(135deg, #E83030 0%, #cc0000 100%);
             color: #ffffff;
             border: none;
             border-radius: 10px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -399,7 +401,7 @@
             }
             
             .register-info h1 {
-                font-size: 2.8rem;
+                font-size: clamp(2rem, 5vw, 2.5rem);
                 text-align: center;
             }
             
@@ -417,11 +419,12 @@
             }
             
             .register-form {
-                padding: 30px 25px;
+                padding: 25px 20px;
+                max-width: 100%;
             }
             
             .form-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
         }
         
@@ -435,25 +438,26 @@
             }
             
             .register-info h1 {
-                font-size: 2.2rem;
+                font-size: clamp(1.8rem, 6vw, 2.2rem);
             }
             
             .register-form {
-                padding: 25px 20px;
+                padding: 20px 15px;
             }
             
             .form-title {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
             
             .form-group input,
             .form-group select,
             .form-group textarea {
-                padding: 15px;
+                padding: 12px 15px;
+                font-size: 0.9rem;
             }
             
             .register-btn {
-                padding: 15px;
-                font-size: 1rem;
+                padding: 12px;
+                font-size: 0.95rem;
             }
         }

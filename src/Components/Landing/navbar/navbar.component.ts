@@ -21,7 +21,7 @@ export class NavbarComponent {
         if (searchInput) {
           searchInput.focus();
         }
-      }, 100);
+      }, 200);
     }
   }
 
@@ -32,6 +32,6 @@ export class NavbarComponent {
       if (searchInput && !searchInput.value.trim()) {
         this.showSearch = false;
       }
-    }, 150);
+    }, 200);
   }
 }
