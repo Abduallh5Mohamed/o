@@ -42,7 +42,9 @@ export class LoginComponent {
       this.router.navigate(['/dashboard']);
     } catch (error: any) {
       console.error('Login error:', error);
-      if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+      if (error.message && error.message.includes('verify your email')) {
+        this.errorMessage = error.message;
+      } else if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
         this.errorMessage = 'Invalid email or password.';
       } else {
         this.errorMessage = 'An error occurred. Please try again later.';

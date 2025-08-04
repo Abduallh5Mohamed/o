@@ -9,11 +9,13 @@ import { TechniciansComponent } from '../Components/Landing/technicians/technici
 import { DashboardComponent } from '../Components/Customer/dashboard/dashboard.component';
 import { VehiclesComponent } from '../Components/Customer/vehicles/vehicles.component';
 import { ServiceHistoryComponent } from '../Components/Customer/service-history/service-history.component';
+import { PendingVerificationComponent } from '../Components/Landing/pending-verification/pending-verification.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'pending-verification', component: PendingVerificationComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: FeedbackComponent },
   { path: 'services', component: ServicesComponent },

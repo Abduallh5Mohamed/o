@@ -51,11 +51,11 @@ export class RegisterComponent {
 
     try {
       await this.authService.signUp(email, password, displayName);
-      this.successMessage = 'Registration successful! Redirecting to dashboard...';
+      this.successMessage = 'Registration successful! Redirecting to email verification...';
       
       // Redirect after a short delay
       setTimeout(() => {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/pending-verification']);
       }, 1500);
       
     } catch (error: any) {

@@ -10,7 +10,9 @@ import {
   Unsubscribe,
   GoogleAuthProvider,
   signInWithPopup,
-  FacebookAuthProvider
+  FacebookAuthProvider,
+  sendEmailVerification,
+  reload
 } from '@angular/fire/auth';
 import { doc, setDoc, Firestore, getDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
@@ -84,6 +86,9 @@ export class AuthService implements OnDestroy {
       const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
       const user = userCredential.user;
       
+      // Send email verification
+      await sendEmailVerification(user);
+      
       // Create user document in Firestore
       await this.setUserData({
         uid: user.uid,
@@ -91,7 +96,8 @@ export class AuthService implements OnDestroy {
         displayName,
         role: 'user',
         createdAt: new Date(),
-        lastLoginAt: new Date()
+        lastLoginAt: new Date(),
+        emailVerified: false
       });
 
       return userCredential;
@@ -105,6 +111,13 @@ export class AuthService implements OnDestroy {
   async signIn(email: string, password: string): Promise<UserCredential> {
     try {
       const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
+      
+      // Check if email is verified
+      if (!userCredential.user.emailVerified) {
+        await this.signOut();
+        throw new Error('Please verify your email before signing in. Check your inbox for the verification link.');
+      }
+      
       return userCredential;
     } catch (error) {
       console.error('Error signing in:', error);
@@ -128,7 +141,8 @@ export class AuthService implements OnDestroy {
           photoURL: result.user.photoURL || '',
           role: 'user',
           createdAt: new Date(),
-          lastLoginAt: new Date()
+          lastLoginAt: new Date(),
+          emailVerified: true // Social logins are pre-verified
         });
       }
       
@@ -155,7 +169,8 @@ export class AuthService implements OnDestroy {
           photoURL: result.user.photoURL || '',
           role: 'user',
           createdAt: new Date(),
-          lastLoginAt: new Date()
+          lastLoginAt: new Date(),
+          emailVerified: true // Social logins are pre-verified
         });
       }
       
@@ -193,6 +208,35 @@ export class AuthService implements OnDestroy {
       take(1),
       map(userData => userData?.role === role || false)
     );
+  }
+
+  // Send email verification
+  async sendEmailVerification(): Promise<void> {
+    const user = this.getCurrentUser();
+    if (user && !user.emailVerified) {
+      try {
+        await sendEmailVerification(user);
+      } catch (error) {
+        console.error('Error sending email verification:', error);
+        throw this.handleAuthError(error);
+      }
+    } else {
+      throw new Error('No user found or email already verified');
+    }
+  }
+
+  // Check if email is verified
+  async checkEmailVerification(): Promise<boolean> {
+    const user = this.getCurrentUser();
+    if (user) {
+      await reload(user);
+      if (user.emailVerified) {
+        // Update user data in Firestore
+        await this.updateUserData({ emailVerified: true });
+        return true;
+      }
+    }
+    return false;
   }
 
   // Get user data from Firestore
