@@ -1,0 +1,116 @@
+<div class="main-content">
+  <div class="container">
+    <div class="register-section">
+      <div class="register-info">
+        <h1>Join Our <span class="highlight">Trusted</span> Service Network</h1>
+        <p>Register now to get exclusive access to premium automotive services and personalized care for your vehicle.</p>
+        
+        <ul class="benefits">
+          <li>Priority booking and scheduling</li>
+          <li>Service history tracking</li>
+          <li>24/7 roadside assistance</li>
+          <li>Quality guarantee on all services</li>
+        </ul>
+      </div>
+
+      <div class="register-form">
+        <h2 class="form-title">Create Your Account</h2>
+        
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <!-- Display Name -->
+          <div class="form-group">
+            <label for="displayName">Display Name</label>
+            <input 
+              type="text" 
+              id="displayName" 
+              formControlName="displayName" 
+              placeholder="Choose a display name"
+              [class.is-invalid]="f['displayName'].touched && f['displayName'].errors"
+            >
+            <div *ngIf="f['displayName'].touched && f['displayName'].errors" class="error-message">
+              <div *ngIf="f['displayName'].errors?.['required']">Display name is required</div>
+              <div *ngIf="f['displayName'].errors?.['minlength']">Name must be at least 3 characters</div>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input 
+              type="email" 
+              id="email" 
+              formControlName="email" 
+              placeholder="Enter your email address"
+              [class.is-invalid]="f['email'].touched && f['email'].errors"
+            >
+            <div *ngIf="f['email'].touched && f['email'].errors" class="error-message">
+              <div *ngIf="f['email'].errors?.['required']">Email is required</div>
+              <div *ngIf="f['email'].errors?.['email']">Please enter a valid email</div>
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input 
+              type="password" 
+              id="password" 
+              formControlName="password" 
+              placeholder="Create a strong password"
+              [class.is-invalid]="f['password'].touched && f['password'].errors"
+            >
+            <div *ngIf="f['password'].touched && f['password'].errors" class="error-message">
+              <div *ngIf="f['password'].errors?.['required']">Password is required</div>
+              <div *ngIf="f['password'].errors?.['minlength']">Password must be at least 6 characters</div>
+            </div>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input 
+              type="password" 
+              id="confirmPassword" 
+              formControlName="confirmPassword" 
+              placeholder="Confirm your password"
+              [class.is-invalid]="(f['confirmPassword'].touched || registerForm.dirty) && 
+                                (registerForm.errors?.['mismatch'] || f['confirmPassword'].errors)"
+            >
+            <div *ngIf="(f['confirmPassword'].touched || registerForm.dirty) && 
+                      (registerForm.errors?.['mismatch'] || f['confirmPassword'].errors)" 
+                 class="error-message">
+              <div *ngIf="registerForm.errors?.['mismatch']">Passwords do not match</div>
+              <div *ngIf="f['confirmPassword'].errors?.['required']">Please confirm your password</div>
+            </div>
+          </div>
+
+          <!-- Terms and Conditions -->
+          <div class="checkbox-group">
+            <input type="checkbox" id="terms" required>
+            <label for="terms">I agree to the <a routerLink="/terms">Terms of Service</a> and <a routerLink="/privacy">Privacy Policy</a></label>
+          </div>
+
+          <!-- Error Message -->
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+
+          <!-- Success Message -->
+          <div *ngIf="successMessage" class="alert alert-success">
+            {{ successMessage }}
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="register-btn" [disabled]="loading || !registerForm.valid">
+            <span *ngIf="!loading">Create Account</span>
+            <span *ngIf="loading">Creating Account...</span>
+          </button>
+        </form>
+
+        <p class="login-link">
+          Already have an account? <a routerLink="/login">Sign in here</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
