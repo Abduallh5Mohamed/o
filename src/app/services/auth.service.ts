@@ -27,6 +27,7 @@ export interface UserData {
   role?: string;
   createdAt?: Date;
   lastLoginAt?: Date;
+  emailVerified?: boolean;
 }
 
 @Injectable({
