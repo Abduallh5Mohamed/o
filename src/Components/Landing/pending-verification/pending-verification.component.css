@@ -1,0 +1,243 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.pending-verification-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.verification-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+}
+
+.verification-icon {
+  font-size: 4rem;
+  color: #E83030;
+  margin-bottom: 20px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+.verification-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.verification-message {
+  font-size: 1.1rem;
+  color: #cccccc;
+  margin-bottom: 15px;
+}
+
+.email-display {
+  background: rgba(232, 48, 48, 0.1);
+  border: 1px solid rgba(232, 48, 48, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #E83030;
+  margin-bottom: 25px;
+  word-break: break-all;
+}
+
+.verification-instructions {
+  font-size: 1rem;
+  color: #cccccc;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.verification-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.btn {
+  padding: 15px 25px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #E83030 0%, #cc0000 100%);
+  color: #ffffff;
+  box-shadow: 0 10px 20px rgba(232, 48, 48, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(232, 48, 48, 0.4);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #cccccc;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.resend-message {
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  animation: slideDown 0.3s ease-out;
+}
+
+.resend-message.success {
+  background-color: rgba(76, 175, 80, 0.1);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+  color: #4caf50;
+}
+
+.resend-message.error {
+  background-color: rgba(244, 67, 54, 0.1);
+  border: 1px solid rgba(244, 67, 54, 0.3);
+  color: #f44336;
+}
+
+.help-section {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.help-section h3 {
+  color: #E83030;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.help-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.help-section li {
+  color: #cccccc;
+  margin-bottom: 8px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.help-section li::before {
+  content: "•";
+  color: #E83030;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+.checking-status {
+  color: #cccccc;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  opacity: 0.7;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .verification-card {
+    padding: 30px 20px;
+    margin: 10px;
+  }
+
+  .verification-title {
+    font-size: 2rem;
+  }
+
+  .verification-icon {
+    font-size: 3rem;
+  }
+
+  .verification-actions {
+    gap: 10px;
+  }
+
+  .btn {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .verification-card {
+    padding: 25px 15px;
+  }
+
+  .verification-title {
+    font-size: 1.8rem;
+  }
+
+  .email-display {
+    font-size: 1rem;
+    padding: 12px;
+  }
+}
