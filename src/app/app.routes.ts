@@ -13,7 +13,7 @@ import { ServiceHistoryComponent } from '../Components/Customer/service-history/
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'signUp', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: FeedbackComponent },
   { path: 'services', component: ServicesComponent },
