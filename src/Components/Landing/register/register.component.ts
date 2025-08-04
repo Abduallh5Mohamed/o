@@ -59,7 +59,7 @@ export class RegisterComponent {
       }, 1500);
       
     } catch (error: any) {
-      console.error('Registration error:', error);
+      console.warn('Registration error:', error);
       
       if (error.code === 'auth/email-already-in-use') {
         this.errorMessage = 'This email is already registered. Please use a different email or log in.';

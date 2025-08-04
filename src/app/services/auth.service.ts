@@ -239,7 +239,22 @@ export class AuthService implements OnDestroy {
 
   // Handle authentication errors
   private handleAuthError(error: any): Error {
-    console.error('Auth error:', error);
+    // Log known authentication errors as warnings instead of errors
+    const knownErrorCodes = [
+      'auth/email-already-in-use',
+      'auth/invalid-email',
+      'auth/weak-password',
+      'auth/user-not-found',
+      'auth/wrong-password',
+      'auth/too-many-requests',
+      'auth/popup-closed-by-user'
+    ];
+    
+    if (error.code && knownErrorCodes.includes(error.code)) {
+      console.warn('Auth warning:', error);
+    } else {
+      console.error('Auth error:', error);
+    }
     
     // Default error message
     let message = 'An error occurred during authentication';
