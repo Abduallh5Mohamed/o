@@ -156,16 +156,14 @@
 .navbar-actions {
   display: flex;
   align-items: center;
-  gap: 1rem; /* reduced gap between elements */
+  gap: 1rem;
 }
 
-/* Search Wrapper (fixed) */
+/* Search Wrapper */
 .search-wrapper {
+  position: relative;
   display: flex;
   align-items: center;
-  flex-direction: row-reverse; /* input left, icon right */
-  margin-right: auto; /* push search section towards left */
-  position: relative; /* allow absolute positioning of input */
 }
 
 /* Search Button */
@@ -181,6 +179,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
 }
 
 .search-btn:hover {
@@ -189,7 +188,47 @@
   transform: scale(1.1);
 }
 
+/* Search Form */
+.search-form {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 5;
+  margin-right: 0.5rem;
+}
 
+.search-form.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.search-form .search-input {
+  width: 200px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 25px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  outline: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.search-form .search-input:focus {
+  border-color: #ff4757;
+  box-shadow: 0 0 10px rgba(255, 71, 87, 0.3);
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.search-form .search-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Legacy search input styles (keeping for compatibility) */
 .search-input {
   position: absolute;
   right: calc(100% + 2rem); /* appear to the left of icon without shifting layout */
@@ -246,27 +285,27 @@
   white-space: nowrap;
 }
 
-.btn-login {
+.btn-signup {
   background: transparent;
   color: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.btn-login:hover {
+.btn-signup:hover {
   color: #ffffff;
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.5);
   transform: translateY(-2px);
 }
 
-.btn-signup {
+.btn-login {
   background: #ff4757;
   color: #ffffff;
   border: 1px solid #ff4757;
   box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
 }
 
-.btn-signup:hover {
+.btn-login:hover {
   background: #ff3742;
   color: #ffffff;
   transform: translateY(-2px);
@@ -330,6 +369,18 @@
     padding: 1rem;
     font-size: 1.2rem;
   }
+
+  .search-form {
+    position: static;
+    transform: none;
+    margin: 1rem 0;
+    width: 100%;
+  }
+
+  .search-form .search-input {
+    width: 100%;
+    max-width: 300px;
+  }
 }
 
 @media (max-width: 576px) {
@@ -350,6 +401,11 @@
   .btn {
     width: 100%;
     max-width: none;
+  }
+
+  .search-form .search-input {
+    width: 100%;
+    max-width: 250px;
   }
 }
 
